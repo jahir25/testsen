@@ -1,31 +1,31 @@
-function onSendMessage(params) {
-    try {
-        var toEmail = "jahirdiaz2595@gmail.com"
-        var apiKey = "re_YC7uzr8u_42vsV42fnp42pG354mAfmjPT"
-        var subject = "Asunto de correo"
-        var message = "message"
+function onSendMessage(event) {
 
-        $.ajax({
-            url: "https://api.resend.com/emails",
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${apiKey}`,
-                "Content-Type": "application/json"
-            },
-            data: JSON.stringify({
-                from: "Acme <onboarding@resend.dev>",
-                to: [toEmail],
-                subject: subject,
-                html: `<p>${message}</p>`
-            }),
-            success: function (response) {
-                console.log(response)
-            },
-            error: function (err) {
-                console.log(err)
-            }
-        });
+     // Prevenir la recarga de la página
+    if (event) {
+        event.preventDefault();
+    }
+
+    try {
+        var apiKey = "apis-token-12634.03iGS6sXJYDMiaklQ9DL2sJ8rTU0Ug7i"
+    
+        const myHeaders = new Headers();
+        myHeaders.append("Authorization", apiKey);
+
+        const requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow"
+        };
+
+        fetch("https://api.apis.net.pe/v2/reniec/dni?numero=46027897", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
+
+
+
     } catch (error) {
         console.log(error)
+        alert("codigo erroneo")
     }
 }
