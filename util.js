@@ -12,9 +12,12 @@ function onSendMessage(event) {
         myHeaders.append("Authorization", apiKey);
 
         const requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow"
+            method: "GET",
+            headers: {
+                Accept: 'application/json',
+                Authorization : "Bearer " + apiKey
+            },
+            mode : "no-cors"
         };
 
         fetch("https://api.apis.net.pe/v2/reniec/dni?numero=46027897", requestOptions)
